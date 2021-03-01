@@ -30,6 +30,18 @@
     width: 85%;
   }
 
+ .flash {
+    background: red;
+    float: left;
+    font-weight: bold;
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    border-style: solid;
+  }
+  
+
   h1 {
     font-size: 36px;
     line-height: 54px;
