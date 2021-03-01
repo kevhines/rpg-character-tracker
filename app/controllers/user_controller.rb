@@ -33,5 +33,13 @@ class UserController < ApplicationController
         end
     end
 
+    get '/users' do
+        if current_user
+            "hello, #{current_user.username}"
+        else
+            redirect '/login'
+        end
+    
+    end
 
 end
