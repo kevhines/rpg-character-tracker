@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_194556) do
+ActiveRecord::Schema.define(version: 2021_03_02_211233) do
 
   create_table "goods", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
-    t.boolean "secret"
     t.integer "user_id"
+    t.integer "secret", default: 0
   end
 
   create_table "notes", force: :cascade do |t|
     t.string "content"
-    t.boolean "secret"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "secret", default: 0
   end
 
   create_table "users", force: :cascade do |t|

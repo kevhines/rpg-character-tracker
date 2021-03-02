@@ -4,5 +4,6 @@
 <input type="hidden" name="_method" value="patch">
 
 <p><b>Note:</b> <textarea name="note[content]" rows="4" cols="50"><%=@note.content%></textarea></p>
+<p><input type="checkbox" id="secret" name="secret" value=1 <%="CHECKED" if @note.secret == 1 %>> <b>Secret</b></p>
 <input type="submit" value="Edit Note"><br><br>
 </form>

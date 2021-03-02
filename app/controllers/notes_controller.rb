@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 
     get '/notes' do
         if current_user 
-            @notes = Note.order(created_at: :desc)
+            @notes = Note.where("secret = 0").order(created_at: :desc)
             erb :"/notes/index"
         else
             redirect "/login"
@@ -19,6 +19,7 @@ class NotesController < ApplicationController
 
     post '/notes' do
         if current_user 
+            params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
             @user.notes << Note.create(params[:note])
             redirect "/notes"
         else
@@ -38,6 +39,7 @@ class NotesController < ApplicationController
     patch '/notes/:id' do
         if current_user 
             note = Note.find_by(id: params[:id])
+            params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
             note.update(params[:note])
             redirect :"/notes"
         else

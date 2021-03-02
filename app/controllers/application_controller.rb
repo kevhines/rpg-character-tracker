@@ -25,8 +25,7 @@ class ApplicationController < Sinatra::Base
     def belongs_to
       @user.id == session[:user_id]
     end
-  
-  
+
   end
 
 end

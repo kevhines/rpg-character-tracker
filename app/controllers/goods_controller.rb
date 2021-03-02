@@ -2,7 +2,7 @@ class GoodsController < ApplicationController
 
     get '/goods' do
         if current_user 
-            @goods = Good.all
+            @goods = Good.where("secret = 0")
             erb :"/goods/index"
         else
             redirect "/login"
@@ -19,6 +19,7 @@ class GoodsController < ApplicationController
 
     post '/goods' do
         if current_user 
+            params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
             @user.goods << Good.create(params[:good])
             redirect "/goods"
         else
@@ -38,6 +39,8 @@ class GoodsController < ApplicationController
     patch '/goods/:id' do
         if current_user 
             good = Good.find_by(id: params[:id])
+            params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
+            #binding.pry
             good.update(params[:good])
             redirect :"/goods"
         else
