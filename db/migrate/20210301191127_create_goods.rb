@@ -1,7 +1,7 @@
-class CreateLoot < ActiveRecord::Migration[5.2]
+class CreateGoods < ActiveRecord::Migration[5.2]
   def change
-    create_table :loot do |t|
-      t.string :loot
+    create_table :goods do |t|
+      t.string :name
       t.integer :quantity
       t.boolean :secret
       t.integer :user_id

@@ -1,0 +1,7 @@
+<% if !!flash[:message] %><div class="flash"><%=flash[:message]%></div><br><% end %>
+<h1><%=@user.character_name%></h1>
+<% if belongs_to %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
+<p><b>Description:</b> <%=@user.description%></p>
+<p><b>Bio:</b> <%=@user.bio%></p>
+<p><b>Equipment:</b> NOT YET ADDED</p>
+<p><b>Notes:</b> NOT YET ADDED</p>

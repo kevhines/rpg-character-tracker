@@ -1,5 +1,7 @@
 require './config/environment'
 
 use Rack::MethodOverride
-use UserController
+use NotesController
+use GoodsController
+use UsersController
 run ApplicationController

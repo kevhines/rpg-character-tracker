@@ -1,0 +1,8 @@
+<h1>Edit Equipment</h1>
+<div class="flash"><%=flash[:message]%></div><br><br>
+<form  action="/goods/<%=@good.id%>" method="post">
+<input type="hidden" name="_method" value="patch">
+<p><b>Quantity:</b> <input type="text" name="good[quantity]" size=5 value=<%=@good.quantity%>></p>
+<p><b>Loot:</b> <input type="text" name="good[name]" value="<%=@good.name%>"></p>
+<input type="submit" value="Edit Equipment"><br><br>
+</form>

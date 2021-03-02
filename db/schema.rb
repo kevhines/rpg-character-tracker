@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2021_03_01_191127) do
 
-  create_table "loot", force: :cascade do |t|
-    t.string "loot"
+  create_table "goods", force: :cascade do |t|
+    t.string "name"
     t.integer "quantity"
     t.boolean "secret"
     t.integer "user_id"
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string "notes"
+    t.string "content"
     t.boolean "secret"
     t.integer "user_id"
   end

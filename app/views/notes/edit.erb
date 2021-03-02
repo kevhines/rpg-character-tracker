@@ -1,0 +1,8 @@
+<h1>Edit Note</h1>
+<div class="flash"><%=flash[:message]%></div><br><br>
+<form  action="/notes/<%=@note.id%>" method="post">
+<input type="hidden" name="_method" value="patch">
+
+<p><b>Note:</b> <textarea name="note[content]" rows="4" cols="50"><%=@note.content%></textarea></p>
+<input type="submit" value="Edit Note"><br><br>
+</form>
