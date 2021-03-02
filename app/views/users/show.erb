@@ -3,5 +3,24 @@
 <% if belongs_to %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
 <p><b>Description:</b> <%=@user.description%></p>
 <p><b>Bio:</b> <%=@user.bio%></p>
-<p><b>Equipment:</b> NOT YET ADDED</p>
-<p><b>Notes:</b> NOT YET ADDED</p>
+<p><b>Equipment:</b><ul>
+<% if @goods.empty? %>
+    <p>No Equipment Added</P>
+<% else %>
+    <ul>
+    <% @goods.each do |good| %>
+        <div id="editdel"><li><%="#{good.quantity} #{good.name}"%></li>
+        <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></div>
+    <% end %>
+<% end %></ul></p>
+<p><b>Notes:</b><ul>
+<% if @notes.empty? %>
+    <p>No Notes Added</P>
+<% else %>
+    <% @notes.each do |note| %>
+        <li><%=note.content%>
+        <form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></li>
+    <% end %>     
+<% end %></ul></p>

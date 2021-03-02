@@ -65,6 +65,8 @@ class UsersController < ApplicationController
                 flash[:message] = "Give Your Character a Name First"
                 redirect "/users/#{@user.id}/edit"
             else
+                @notes = @user.notes.order(created_at: :desc)
+                @goods = @user.goods
                 erb :'/users/show'
             end
         else

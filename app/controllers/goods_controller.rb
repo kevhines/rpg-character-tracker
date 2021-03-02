@@ -45,5 +45,14 @@ class GoodsController < ApplicationController
         end
     end
 
+    delete '/goods/:id' do
+        if current_user 
+            good = Good.find_by(id: params[:id])
+            good.destroy
+            redirect :"/users/#{@user.id}"
+        else
+            redirect "/login"
+        end
+    end
 
 end

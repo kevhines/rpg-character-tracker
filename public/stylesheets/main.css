@@ -9,8 +9,13 @@
     padding-left: 5px;
     border-style: solid;
   }
-
 /*
+div#editdel {
+  display: inline-block;
+  align: right
+}
+
+
 input[type="submit"] {
   background: #016ABC;
 

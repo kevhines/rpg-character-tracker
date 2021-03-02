@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 
     get '/notes' do
         if current_user 
-            @notes = Note.all
+            @notes = Note.order(created_at: :desc)
             erb :"/notes/index"
         else
             redirect "/login"
@@ -45,6 +45,15 @@ class NotesController < ApplicationController
         end
     end
 
+    delete '/notes/:id' do
+        if current_user 
+            note = Note.find_by(id: params[:id])
+            note.destroy
+            redirect :"/users/#{@user.id}"
+        else
+            redirect "/login"
+        end
+    end
 
 
 end
