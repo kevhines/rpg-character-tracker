@@ -28,8 +28,10 @@ class NotesController < ApplicationController
     end  
 
     get '/notes/:id/edit' do
+       # binding.pry
         if current_user 
             @note = Note.find_by(id: params[:id])
+            #redirect "/notes/#{@note.id}" unless belongs_to(@note) # haven't tested this yet
             erb :"/notes/edit"
         else
             redirect "/login"

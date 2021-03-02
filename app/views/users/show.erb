@@ -1,6 +1,6 @@
 <% if !!flash[:message] %><div class="flash"><%=flash[:message]%></div><br><% end %>
 <h1><%=@user.character_name%></h1>
-<% if belongs_to %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
+<% if belongs_to(@user) %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
 <p><b>Description:</b> <%=@user.description%></p>
 <p><b>Bio:</b> <%=@user.bio%></p>
 <p><b>Equipment:</b>
@@ -10,8 +10,8 @@
     <ul>
     <% @goods.each do |good| %>
         <div id="editdel"><li><%="#{good.quantity} #{good.name}"%></li>
-        <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
-        <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></div>
+        <% if belongs_to(@user) %><form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form><%end%></div>
     <% end %>
 <% end %></ul></p>
 <p><b>Notes:</b>
@@ -28,9 +28,7 @@
 
 
 
-<% if @secret_goods.empty? %>
-    <p>No Equipment Added</P>
-<% else %>
+<% if !@secret_goods.empty? %>
 <p><b>Secret Equipment:</b><ul>
     <ul>
     <% @secret_goods.each do |good| %>
@@ -41,9 +39,7 @@
 </ul></p>
 <% end %>
 
-<% if @secret_notes.empty? %>
-    <p>No Notes Added</P>
-<% else %>
+<% if !@secret_notes.empty? %>
 <p><b>Secret Notes:</b><ul>
     <% @secret_notes.each do |note| %>
         <li><%=note.content%>

@@ -22,8 +22,13 @@ class ApplicationController < Sinatra::Base
       @user = User.find_by(id: session[:user_id])
     end
 
-    def belongs_to
-      @user.id == session[:user_id]
+    def belongs_to(obj)
+      #binding.pry
+      if obj.class == User
+        obj == current_user
+      else
+        obj.user_id == current_user.id
+      end
     end
 
   end
