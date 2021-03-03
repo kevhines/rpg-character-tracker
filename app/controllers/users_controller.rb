@@ -52,7 +52,8 @@ class UsersController < ApplicationController
 
     get '/users' do
         redirect_if_not_logged_in
-        "hello, #{current_user.username}"
+        @users = User.all
+        erb :'/users/index'
     end
 
     get '/users/:id' do
