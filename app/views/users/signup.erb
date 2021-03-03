@@ -2,9 +2,9 @@
 <% @errors && @errors.each do |m| %>
   <div class="flash"><li><%=m%></li></div><br>
 <%end%>
-<br>
+<i>Username must have no spaces or special characters.</I>
 <form  action="/signup" method="post">
-  <p>User Name: <input type="text" name="user[username]"></p>
+  <p>Username: <input type="text" name="user[username]"></p>
   <p>Password: <input type="password" name="user[password]"></p>
   <input type="submit" value="Sign Up">
 </form>

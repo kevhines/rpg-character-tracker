@@ -15,6 +15,17 @@
   </head>
   <body>
     <div class="wrapper">
+  <% if current_user %>
+  <a href='/users'>Characters</a> |
+  <a href='/goods'>Equipment</a> |
+  <a href='/notes'>Notes</a> |
+  <a href='/users/<%=current_user.id%>'><%=current_user.character_name%> (Home Page)</a> |
+  <a href='/logout'>Logout Here</a>
+  <% else %>
+  <a href='/login'>Login Here</a> |
+  <a href='/signup'>Sign Up Here</a>
+  <% end %>
+  <br><br>
 
         <%= yield %>
 

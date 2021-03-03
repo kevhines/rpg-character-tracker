@@ -12,8 +12,7 @@ class UsersController < ApplicationController
         u = User.create(params[:user])
         if u.id
             session[:user_id] = u.id
-            redirect "/"
-           # redirect "/users/#{u.id}"
+            redirect "/users/#{u.id}"
           else
             @errors = u.errors.full_messages
             erb :'/users/signup'
