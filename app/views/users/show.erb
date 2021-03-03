@@ -21,13 +21,13 @@
     <ul>
     <% @notes.each do |note| %>
         <li><%=note.content%>
-        <form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
-        <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></li>
+        <% if belongs_to(@user) %><form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form><%end%></li>
     <% end %>     
 <% end %></ul></p>
 
 
-
+<% if belongs_to(@user) %>
 <% if !@secret_goods.empty? %>
 <p><b>Secret Equipment:</b><ul>
     <ul>
@@ -48,3 +48,4 @@
     <% end %>     
 </ul></p>
 <% end %>
+<% end %> 

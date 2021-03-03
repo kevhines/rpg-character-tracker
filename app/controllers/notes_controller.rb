@@ -1,63 +1,42 @@
 class NotesController < ApplicationController
 
     get '/notes' do
-        if current_user 
-            @notes = Note.where("secret = 0").order(created_at: :desc)
-            erb :"/notes/index"
-        else
-            redirect "/login"
-        end  
+        redirect_if_not_logged_in
+        @notes = Note.where("secret = 0").order(created_at: :desc)
+        erb :"/notes/index"
     end
     
     get '/notes/new' do
-        if current_user 
-            erb :"/notes/new"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        erb :"/notes/new"
     end
 
     post '/notes' do
-        if current_user 
-            params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
-            @user.notes << Note.create(params[:note])
-            redirect "/notes"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
+        current_user.notes << Note.create(params[:note])
+        redirect "/notes"
     end  
 
     get '/notes/:id/edit' do
-       # binding.pry
-        if current_user 
-            @note = Note.find_by(id: params[:id])
-            #redirect "/notes/#{@note.id}" unless belongs_to(@note) # haven't tested this yet
-            erb :"/notes/edit"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        @note = Note.find_by(id: params[:id])
+        #redirect "/notes/#{@note.id}" unless belongs_to(@note) # haven't tested this yet
+        erb :"/notes/edit"
     end
 
     patch '/notes/:id' do
-        if current_user 
-            note = Note.find_by(id: params[:id])
-            params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
-            note.update(params[:note])
-            redirect :"/notes"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        note = Note.find_by(id: params[:id])
+        params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
+        note.update(params[:note])
+        redirect :"/notes"
     end
 
     delete '/notes/:id' do
-        if current_user 
-            note = Note.find_by(id: params[:id])
-            note.destroy
-            redirect :"/users/#{@user.id}"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        note = Note.find_by(id: params[:id])
+        note.destroy
+        redirect :"/users/#{current_user.id}"
     end
-
-
 end

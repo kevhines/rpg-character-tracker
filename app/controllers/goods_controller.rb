@@ -1,61 +1,43 @@
 class GoodsController < ApplicationController
 
     get '/goods' do
-        if current_user 
-            @goods = Good.where("secret = 0")
-            erb :"/goods/index"
-        else
-            redirect "/login"
-        end  
+        redirect_if_not_logged_in
+        @goods = Good.where("secret = 0")
+        erb :"/goods/index"
+
     end
     
     get '/goods/new' do
-        if current_user 
-            erb :"/goods/new"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        erb :"/goods/new"
+
     end
 
     post '/goods' do
-        if current_user 
-            params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
-            @user.goods << Good.create(params[:good])
-            redirect "/goods"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
+        current_user.goods << Good.create(params[:good])
+        redirect "/goods"
     end  
 
     get '/goods/:id/edit' do
-        if current_user 
-            @good = Good.find_by(id: params[:id])
-            erb :"/goods/edit"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        @good = Good.find_by(id: params[:id])
+        erb :"/goods/edit"
     end
 
     patch '/goods/:id' do
-        if current_user 
-            good = Good.find_by(id: params[:id])
-            params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
-            #binding.pry
-            good.update(params[:good])
-            redirect :"/goods"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        good = Good.find_by(id: params[:id])
+        params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
+        good.update(params[:good])
+        redirect :"/goods"
     end
 
     delete '/goods/:id' do
-        if current_user 
-            good = Good.find_by(id: params[:id])
-            good.destroy
-            redirect :"/users/#{@user.id}"
-        else
-            redirect "/login"
-        end
+        redirect_if_not_logged_in
+        good = Good.find_by(id: params[:id])
+        good.destroy
+        redirect :"/users/#{current_user.id}"
     end
-
 end

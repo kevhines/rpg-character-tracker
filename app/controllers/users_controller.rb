@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-       # binding.pry
-        if !!current_user
+       if !!current_user
            redirect "/users/#{current_user.id}"
        else
            erb :'/users/signup'
@@ -52,27 +51,22 @@ class UsersController < ApplicationController
     end
 
     get '/users' do
-        if current_user
-            "hello, #{current_user.username}"
-        else
-            redirect '/login'
-        end
+        redirect_if_not_logged_in
+        "hello, #{current_user.username}"
     end
 
     get '/users/:id' do
-        if current_user
-            if @user.character_name == "" || @user.character_name == nil
-                flash[:message] = "Give Your Character a Name First"
-                redirect "/users/#{@user.id}/edit"
-            else
-                @notes = @user.notes.where("secret = 0").order(created_at: :desc)
-                @goods = @user.goods.where("secret = 0")
-                @secret_notes = @user.notes.where("secret = 1").order(created_at: :desc)
-                @secret_goods = @user.goods.where("secret = 1")
-                erb :'/users/show'
-            end
+        redirect_if_not_logged_in
+        @user = User.find_by(id: params[:id])
+        if (@user.character_name == "" || @user.character_name == nil) && belongs_to(@user)
+            flash[:message] = "Give Your Character a Name First"
+            redirect "/users/#{@user.id}/edit"
         else
-            redirect '/login'
+            @notes = @user.notes.where("secret = 0").order(created_at: :desc)
+            @goods = @user.goods.where("secret = 0")
+            @secret_notes = @user.notes.where("secret = 1").order(created_at: :desc)
+            @secret_goods = @user.goods.where("secret = 1")
+            erb :'/users/show'
         end
     end
 
