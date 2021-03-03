@@ -15,6 +15,7 @@
   </head>
   <body>
     <div class="wrapper">
+  <div class="navbar_top">
   <% if current_user %>
   <a href='/users'>Characters</a> |
   <a href='/goods'>Equipment</a> |
@@ -25,6 +26,7 @@
   <a href='/login'>Login Here</a> |
   <a href='/signup'>Sign Up Here</a>
   <% end %>
+  </div>
   <br><br>
 
         <%= yield %>

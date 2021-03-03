@@ -17,26 +17,40 @@
   li {
     margin: 0 25px 5px 0;
   }
-/*
-div#editdel {
-  display: inline-block;
-  align: right
+
+  /* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 45%;
+  padding: 10px;
 }
 
+.editdel {
+  display: flex;
+}
 
-input[type="submit"] {
+.testbuttons {
+  display: flex;
+  right: 20px;
+  width: 5%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.editdel input[type="submit"] {
   background: #016ABC;
-
   color: #fff;
-  
   border: 1px solid #eee;
-  
   border-radius: 20px;
-  
   box-shadow: 5px 5px 5px #eee;
-  
   text-shadow:none;
-  }*/
+  margin: 0 0 0 5px;
+  }
 
 @media screen {
   /* --- Reset Styles --- */
