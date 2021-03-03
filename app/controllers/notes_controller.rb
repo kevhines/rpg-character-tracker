@@ -9,6 +9,7 @@ class NotesController < ApplicationController
     
     get '/notes/new' do
         redirect_if_not_logged_in
+        # request.env["HTTP_REFERER"] - could store in a hidden field for a redirect?
         erb :"/notes/new"
     end
 
