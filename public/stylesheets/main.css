@@ -25,6 +25,13 @@
   padding: 10px;
 }
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .editdel {
   display: flex;
 }
@@ -35,11 +42,21 @@
   width: 5%;
 }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+
+.add_button {
+  font-weight: bold;
+  font-size: 35px;
+  display: flex;
+  padding-right: 10px;
+}
+
+.add_text {
+  display: flex;
+}
+
+.posted {
+  font-size: 12px;
+  font-style: italic;
 }
 
 .editdel input[type="submit"] {

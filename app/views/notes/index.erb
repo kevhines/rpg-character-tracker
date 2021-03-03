@@ -1,7 +1,8 @@
 <h1>All Notes</h1>
-<a href='/notes/new'>Add New Notes</a>
-<ul class="notes">
+<div class="add_text"><div class="add_button">+</div><a href='/notes/new'>Add New Notes</a></div>
+
+<ul>
 <% @notes.each do |note| %>
-    <li class="notes"><%=note.content%></li>
+    <li><%=note.content%> <div class="posted">posted by <%=note.user.character_name%></div></li>
 <% end %>
 </ul>

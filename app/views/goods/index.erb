@@ -1,7 +1,7 @@
 <h1>All Equipment</h1>
-<a href='/goods/new'>Add New Equipment</a>
+<div class="add_text"><div class="add_button">+</div><a href='/goods/new'>Add New Equipment</a></div>
 <ul>
 <% @goods.each do |good| %>
-    <li><%=good.quantity%> <%=good.name%></li>
+    <li><%=good.quantity%> <%=good.name%><div class="posted">held by <%=good.user.character_name%></div></li>
 <% end %>
 </ul>
