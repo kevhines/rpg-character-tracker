@@ -16,7 +16,7 @@ class NotesController < ApplicationController
         redirect_if_not_logged_in
         params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
         current_user.notes << Note.create(params[:note])
-        redirect "/notes"
+        redirect "/users/#{current_user.id}"
     end  
 
     get '/notes/:id/edit' do
@@ -31,13 +31,13 @@ class NotesController < ApplicationController
         note = Note.find_by(id: params[:id])
         params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
         note.update(params[:note])
-        redirect :"/notes"
+        redirect "/users/#{current_user.id}"
     end
 
     delete '/notes/:id' do
         redirect_if_not_logged_in
         note = Note.find_by(id: params[:id])
         note.destroy
-        redirect :"/users/#{current_user.id}"
+        redirect "/users/#{current_user.id}"
     end
 end
