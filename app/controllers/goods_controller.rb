@@ -3,8 +3,8 @@ class GoodsController < ApplicationController
     get '/goods' do
         redirect_if_not_logged_in
         @goods = Good.where("secret = 0")
+        @secret_goods = Good.where("secret = 1 and user_id = #{current_user.id}")
         erb :"/goods/index"
-
     end
     
     get '/goods/new' do

@@ -1,8 +1,30 @@
 <h1>All Notes</h1>
 <div class="add_text"><div class="add_button">+</div><a href='/notes/new'>Add New Notes</a></div>
 
+<% if !@secret_notes.empty? %>
+    <h2>Secret Notes</h2>
+    <ul>
+    <% @secret_notes.each do |note| %>
+        <li><div class="editdel"><%=note.content%> 
+        <% if belongs_to(note.user) %>
+            <form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+            <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
+        <%end%>
+        </div>
+        <div class="posted">posted by <%=note.user.character_name%></div></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<h2>Known Notes</h2>
 <ul>
 <% @notes.each do |note| %>
-    <li><%=note.content%> <div class="posted">posted by <%=note.user.character_name%></div></li>
+    <li><div class="editdel"><%=note.content%> 
+    <% if belongs_to(note.user) %>
+        <form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
+    <%end%>
+    </div>
+    <div class="posted">posted by <%=note.user.character_name%></div></li>
 <% end %>
 </ul>

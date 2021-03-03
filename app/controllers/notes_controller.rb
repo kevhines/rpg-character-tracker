@@ -3,6 +3,7 @@ class NotesController < ApplicationController
     get '/notes' do
         redirect_if_not_logged_in
         @notes = Note.where("secret = 0").order(created_at: :desc)
+        @secret_notes = Note.where("secret = 1 and user_id = #{current_user.id}")
         erb :"/notes/index"
     end
     

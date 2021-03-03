@@ -3,10 +3,10 @@
 <% if belongs_to(@user) %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
 <p><b>Description:</b> <%=@user.description%></p>
 <p><b>Bio:</b> <%=@user.bio%></p>
-
+<h3> Personal Equipment and Notes <% if belongs_to(@user) %> - <a href='/goods/new'>Add New Equipment</a> | <a href='/notes/new'>Add New Notes</a><% end %></h3>
 <div class="row">
 <div class="column">
-<p><b>Equipment:</b><% if belongs_to(@user) %> <a href='/goods/new'>Add New Equipment</a><% end %>
+<p><b>Equipment:</b>
 <% if @goods.empty? %>
     <p>No Equipment Added</P>
 <% else %>
@@ -14,10 +14,8 @@
     <% @goods.each do |good| %>
         <li><div class="editdel"><%="#{good.quantity} #{good.name}"%>
         <% if belongs_to(@user) %>
-            <span class="testbuttons">
                 <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
                 <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
-            </span>
         <%end%></div></li>
     <% end %>
 <% end %></ul></p>

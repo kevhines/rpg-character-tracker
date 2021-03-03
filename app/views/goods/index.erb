@@ -1,7 +1,31 @@
 <h1>All Equipment</h1>
 <div class="add_text"><div class="add_button">+</div><a href='/goods/new'>Add New Equipment</a></div>
+<% if !@secret_goods.empty? %>
+    <h2>Secret Equipment</h2>
+    <ul>
+    <% @secret_goods.each do |good| %>
+        <li><div class="editdel"><%=good.quantity%> <%=good.name%> 
+        <% if belongs_to(good.user) %>
+            <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+            <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
+        <%end%>
+        </div>
+        <div class="posted">held by <%=good.user.character_name%></div></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<h2>Known Equipment</h2>
 <ul>
 <% @goods.each do |good| %>
-    <li><%=good.quantity%> <%=good.name%><div class="posted">held by <%=good.user.character_name%></div></li>
+    <li><div class="editdel"><%=good.quantity%> <%=good.name%> 
+    <% if belongs_to(good.user) %>
+        <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
+    <%end%>
+    </div>
+    <div class="posted">held by <%=good.user.character_name%></div></li>
 <% end %>
 </ul>
+
+
