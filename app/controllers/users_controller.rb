@@ -13,10 +13,10 @@ class UsersController < ApplicationController
         if u.id
             session[:user_id] = u.id
             redirect "/users/#{u.id}"
-          else
+        else
             @errors = u.errors.full_messages
             erb :'/users/signup'
-          end
+        end
     end
 
     get '/login' do
@@ -71,23 +71,21 @@ class UsersController < ApplicationController
     end
 
     get '/users/:id/edit' do
+        redirect_if_not_logged_in
         @user = User.find_by(id: params[:id])
         erb :'/users/edit'
     end
 
     patch '/users/:id' do
+        redirect_if_not_logged_in
         user = User.find_by(id: params[:id])
-        user.update(params[:user])
-        if user.character_name == "" 
-            flash[:message] = "Give Your Character a Name."
-            redirect "/users/#{user.id}/edit"
-        else 
-            redirect "/users/#{user.id}"
+        if belongs_to(user)
+            user.update(params[:user])
+            if user.character_name == "" 
+                flash[:message] = "Give Your Character a Name."
+                redirect "/users/#{user.id}/edit"
+            end
         end
+        redirect "/users/#{user.id}"
     end
-
-
-
-
-
 end

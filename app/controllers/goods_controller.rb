@@ -23,6 +23,7 @@ class GoodsController < ApplicationController
     get '/goods/:id/edit' do
         redirect_if_not_logged_in
         @good = Good.find_by(id: params[:id])
+        redirect "/goods" unless belongs_to(@good) # haven't tested this yet
         erb :"/goods/edit"
     end
 
@@ -30,14 +31,14 @@ class GoodsController < ApplicationController
         redirect_if_not_logged_in
         good = Good.find_by(id: params[:id])
         params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
-        good.update(params[:good])
+        good.update(params[:good]) if belongs_to(good)
         redirect "/users/#{current_user.id}"
     end
 
     delete '/goods/:id' do
         redirect_if_not_logged_in
         good = Good.find_by(id: params[:id])
-        good.destroy
+        good.destroy if belongs_to(good)
         redirect "/users/#{current_user.id}"
     end
 end

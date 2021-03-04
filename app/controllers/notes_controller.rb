@@ -23,7 +23,7 @@ class NotesController < ApplicationController
     get '/notes/:id/edit' do
         redirect_if_not_logged_in
         @note = Note.find_by(id: params[:id])
-        #redirect "/notes/#{@note.id}" unless belongs_to(@note) # haven't tested this yet
+        redirect "/notes" unless belongs_to(@note) # haven't tested this yet
         erb :"/notes/edit"
     end
 
@@ -31,14 +31,14 @@ class NotesController < ApplicationController
         redirect_if_not_logged_in
         note = Note.find_by(id: params[:id])
         params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
-        note.update(params[:note])
+        note.update(params[:note]) if belongs_to(note)
         redirect "/users/#{current_user.id}"
     end
 
     delete '/notes/:id' do
         redirect_if_not_logged_in
         note = Note.find_by(id: params[:id])
-        note.destroy
+        note.destroy if belongs_to(note)
         redirect "/users/#{current_user.id}"
     end
 end
