@@ -22,10 +22,9 @@ class GoodsController < ApplicationController
 
     get '/goods/:id/edit' do
         redirect_if_not_logged_in
-        redirect '/goods' if !@good
         @good = Good.find_by(id: params[:id])
         redirect '/goods' if !@good
-        redirect "/goods" unless belongs_to(@good) # haven't tested this yet
+        redirect "/goods" unless belongs_to(@good)
         erb :"/goods/edit"
     end
 

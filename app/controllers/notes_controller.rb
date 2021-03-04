@@ -9,7 +9,6 @@ class NotesController < ApplicationController
     
     get '/notes/new' do
         redirect_if_not_logged_in
-        # request.env["HTTP_REFERER"] - could store in a hidden field for a redirect?
         erb :"/notes/new"
     end
 
@@ -24,7 +23,7 @@ class NotesController < ApplicationController
         redirect_if_not_logged_in
         @note = Note.find_by(id: params[:id])
         redirect '/notes' if !@note
-        redirect "/notes" unless belongs_to(@note) # haven't tested this yet
+        redirect "/notes" unless belongs_to(@note) 
         erb :"/notes/edit"
     end
 

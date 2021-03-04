@@ -27,13 +27,13 @@ class ApplicationController < Sinatra::Base
     end
 
     def belongs_to(obj)
-      #binding.pry
       if obj.class == User
         obj == current_user
       else
         obj.user_id == current_user.id
       end
     end
+  
   end
 
 end

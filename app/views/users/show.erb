@@ -14,7 +14,7 @@
     <% @goods.each do |good| %>
         <li><div class="editdel"><%="#{good.quantity} #{good.name}"%>
         <% if belongs_to(@user) %>
-                <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+                <a href="/goods/<%=good.id%>/edit"><input type="button" class="button" value="Edit"></a>
                 <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form> 
         <%end%></div></li>
     <% end %>
@@ -26,7 +26,7 @@
     <ul>
     <% @notes.each do |note| %>
         <li><div class="editdel"><%=note.content%>
-        <% if belongs_to(@user) %><form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <% if belongs_to(@user) %><a href="/notes/<%=note.id%>/edit"><input type="button" class="button" value="Edit"></a>
         <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form><%end%></div></li>
     <% end %>     
 <% end %></ul></p>
@@ -38,7 +38,7 @@
     <ul>
     <% @secret_goods.each do |good| %>
         <li><div class="editdel"><%="#{good.quantity} #{good.name}"%>
-        <form action="/goods/<%=good.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <a href="/goods/<%=good.id%>/edit"><input type="button" class="button" value="Edit"></a>
         <form action="/goods/<%=good.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></div></li>
     <% end %>
 </ul></p>
@@ -48,7 +48,7 @@
 <p><b>Secret Notes:</b><ul>
     <% @secret_notes.each do |note| %>
         <li><div class="editdel"><%=note.content%>
-        <form action="/notes/<%=note.id%>/edit" method="get"><input type="submit" value="Edit"></form>
+        <a href="/notes/<%=note.id%>/edit"><input type="button" class="button" value="Edit"></a>
         <form action="/notes/<%=note.id%>" method="post"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete"></form></div></li>
     <% end %>     
 </ul></p>

@@ -69,6 +69,16 @@
   margin: 0 0 0 5px;
   }
 
+ input.button {
+    background: #016ABC;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #eee;
+    text-shadow:none;
+    margin: 0 0 0 5px;
+    }
+
 @media screen {
   /* --- Reset Styles --- */
 
