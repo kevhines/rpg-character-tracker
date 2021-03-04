@@ -31,13 +31,9 @@ class UsersController < ApplicationController
         user = User.find_by(username: params[:user][:username])
         if user && user.authenticate(params[:user][:password])
           session[:user_id] = user.id
-            if user.character_name == "" || user.character_name == nil
-                flash[:message] = "Give Your Character a Name First"
-                redirect "/users/#{user.id}/edit"
-            else
-                flash[:message] = "login successful!"
-                redirect "/users/#{user.id}"
-            end
+          character_name_blank?(user)
+          flash[:message] = "login successful!"
+          redirect "/users/#{user.id}"
         else
           @errors = ["Invalid Login"]
           erb :'users/login'
@@ -56,7 +52,6 @@ class UsersController < ApplicationController
     end
 
     get '/users/' do
-        redirect_if_not_logged_in
         redirect '/users'
     end
 
@@ -64,16 +59,12 @@ class UsersController < ApplicationController
         redirect_if_not_logged_in
         @user = User.find_by(id: params[:id])
         redirect '/users' if !@user
-        if (@user.character_name == "" || @user.character_name == nil) && belongs_to(@user)
-            flash[:message] = "Give Your Character a Name First"
-            redirect "/users/#{@user.id}/edit"
-        else
-            @notes = @user.notes.where("secret = 0").order(created_at: :desc)
-            @goods = @user.goods.where("secret = 0")
-            @secret_notes = @user.notes.where("secret = 1").order(created_at: :desc)
-            @secret_goods = @user.goods.where("secret = 1")
-            erb :'/users/show'
-        end
+        character_name_blank?(@user) if belongs_to(@user)
+        @notes = @user.notes.where("secret = 0").order(created_at: :desc)
+        @goods = @user.goods.where("secret = 0")
+        @secret_notes = @user.notes.where("secret = 1").order(created_at: :desc)
+        @secret_goods = @user.goods.where("secret = 1")
+        erb :'/users/show'
     end
 
     get '/users/:id/edit' do
@@ -87,10 +78,7 @@ class UsersController < ApplicationController
         user = User.find_by(id: params[:id])
         if belongs_to(user)
             user.update(params[:user])
-            if user.character_name == "" 
-                flash[:message] = "Give Your Character a Name."
-                redirect "/users/#{user.id}/edit"
-            end
+            character_name_blank?(user)
         end
         redirect "/users/#{user.id}"
     end

@@ -41,8 +41,7 @@ class NotesController < ApplicationController
     get '/notes/:id/edit' do
         redirect_if_not_logged_in
         @note = Note.find_by(id: params[:id])
-        redirect '/notes' if !@note
-        redirect "/notes" unless belongs_to(@note) 
+        redirect '/notes' unless @note && belongs_to(@note)
         erb :"/notes/edit"
     end
 
