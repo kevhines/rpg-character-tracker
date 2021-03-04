@@ -55,9 +55,15 @@ class UsersController < ApplicationController
         erb :'/users/index'
     end
 
+    get '/users/' do
+        redirect_if_not_logged_in
+        redirect '/users'
+    end
+
     get '/users/:id' do
         redirect_if_not_logged_in
         @user = User.find_by(id: params[:id])
+        redirect '/users' if !@user
         if (@user.character_name == "" || @user.character_name == nil) && belongs_to(@user)
             flash[:message] = "Give Your Character a Name First"
             redirect "/users/#{@user.id}/edit"

@@ -34,7 +34,6 @@ class ApplicationController < Sinatra::Base
         obj.user_id == current_user.id
       end
     end
-
   end
 
 end
