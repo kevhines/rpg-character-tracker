@@ -1,5 +1,5 @@
 <h1>Update Your Character</h1>
-<div class="flash"><%=flash[:message]%></div><br><br>
+<br><br>
 <form  action="/users/<%=@user.id%>" method="post">
 <input type="hidden" name="_method" value="patch">
 <p><b>Character Name:</b> <input type="text" name="user[character_name]" value="<%=@user.character_name%>"></p>

@@ -27,8 +27,14 @@
   <a href='/signup'>Sign Up</a>
   <% end %>
   </div>
-  <br><br>
-
+  <br><br><% if !!flash[:message] %><div class="flash"><%=flash[:message]%></div><br><% end %>
+  <%if @errors%>
+  <div class="flash"><ul>
+  <%@errors.each do |m| %>
+    <li><%=m%></li>
+  <%end%>
+  </ul></div><br>
+  <%end%>
         <%= yield %>
 
       <footer class="branding">

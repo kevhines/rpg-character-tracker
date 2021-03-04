@@ -1,8 +1,8 @@
 <h1>Add Equipment</h1>
-<div class="flash"><%=flash[:message]%></div><br><br>
+<br><br>
 <form  action="/goods" method="post">
 <p><b>Quantity:</b> <input type="text" name="good[quantity]" size=5 value=1></p>
-<p><b>Loot:</b> <input type="text" name="good[name]"></p>
+<p><b>Equipment Name:</b> <input type="text" name="good[name]"></p>
 <p><input type="checkbox" id="secret" name="secret" value=1> <b>Secret</b></p>
 <input type="submit" value="Add Equipment"><br><br>
 </form>

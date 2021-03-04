@@ -12,11 +12,30 @@ class NotesController < ApplicationController
         erb :"/notes/new"
     end
 
+    post '/goods' do
+        redirect_if_not_logged_in
+        params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
+        good = Good.create(params[:good])
+        if good.id
+            current_user.goods << good
+            redirect "/users/#{current_user.id}"
+        else 
+            @errors = good.errors.full_messages
+            erb :'/goods/new'
+        end
+    end  
+
     post '/notes' do
         redirect_if_not_logged_in
         params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
-        current_user.notes << Note.create(params[:note])
-        redirect "/users/#{current_user.id}"
+        note =  Note.create(params[:note])
+        if note.id
+            current_user.notes << note
+            redirect "/users/#{current_user.id}"
+        else
+            @errors = note.errors.full_messages
+            erb :'/notes/new'
+        end
     end  
 
     get '/notes/:id/edit' do

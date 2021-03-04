@@ -12,7 +12,8 @@ class ApplicationController < Sinatra::Base
   register Sinatra::Flash
 
   get "/" do
-    erb :index
+    redirect "/users"
+    #erb :index
     #erb :welcome
   end
 

@@ -1,6 +1,5 @@
-<% if !!flash[:message] %><div class="flash"><%=flash[:message]%></div><br><% end %>
 <h1><%=@user.character_name%></h1>
-<% if belongs_to(@user) %><a href='/users/<%=@user.id%>/edit'>Edit Character</a><% end %><br><br>
+<% if belongs_to(@user) %><a href='/users/<%=@user.id%>/edit'><input type="button" class="button" value="Edit Character"></a><% end %><br><br>
 <p><b>Description:</b> <%=@user.description%></p>
 <p><b>Bio:</b> <%=@user.bio%></p>
 <h3> Personal Equipment and Notes <% if belongs_to(@user) %> - <a href='/goods/new'>Add New Equipment</a> | <a href='/notes/new'>Add New Notes</a><% end %></h3>

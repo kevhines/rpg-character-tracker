@@ -1,13 +1,17 @@
   /* added by Kevin to format error messages */
   .flash {
     background: red;
-    float: left;
+    float: none;
     font-weight: bold;
     padding-top: 1px;
     padding-right: 5px;
     padding-bottom: 1px;
     padding-left: 5px;
     border-style: solid;
+  }
+
+  .flash li {
+    margin: 0 0 0 0;
   }
 
   body ul {

@@ -16,8 +16,14 @@ class GoodsController < ApplicationController
     post '/goods' do
         redirect_if_not_logged_in
         params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
-        current_user.goods << Good.create(params[:good])
-        redirect "/users/#{current_user.id}"
+        good = Good.create(params[:good])
+        if good.id
+            current_user.goods << good
+            redirect "/users/#{current_user.id}"
+        else 
+            @errors = good.errors.full_messages
+            erb :'/goods/new'
+        end
     end  
 
     get '/goods/:id/edit' do

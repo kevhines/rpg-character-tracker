@@ -1,5 +1,5 @@
 <h1>Edit Note</h1>
-<div class="flash"><%=flash[:message]%></div><br><br>
+<br><br>
 <form  action="/notes/<%=@note.id%>" method="post">
 <input type="hidden" name="_method" value="patch">
 
