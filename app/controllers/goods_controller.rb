@@ -39,7 +39,12 @@ class GoodsController < ApplicationController
         good = Good.find_by(id: params[:id])
         params[:secret] ? params[:good][:secret] = 1 : params[:good][:secret] = 0
         good.update(params[:good]) if belongs_to(good)
-        redirect "/users/#{current_user.id}"
+        if good.errors.full_messages.empty?
+            redirect "/users/#{current_user.id}"
+        else
+            flash[:message] = good.errors.full_messages[0]
+            redirect "/goods/#{good.id}/edit"
+        end
     end
 
     delete '/goods/:id' do

@@ -51,7 +51,12 @@ class NotesController < ApplicationController
         note = Note.find_by(id: params[:id])
         params[:secret] ? params[:note][:secret] = 1 : params[:note][:secret] = 0
         note.update(params[:note]) if belongs_to(note)
-        redirect "/users/#{current_user.id}"
+        if note.errors.full_messages.empty?
+            redirect "/users/#{current_user.id}"
+        else
+            flash[:message] = note.errors.full_messages[0]
+            redirect "/notes/#{note.id}/edit"
+        end
     end
 
     delete '/notes/:id' do

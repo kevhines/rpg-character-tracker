@@ -13,8 +13,6 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     redirect "/users"
-    #erb :index
-    #erb :welcome
   end
 
   helpers do

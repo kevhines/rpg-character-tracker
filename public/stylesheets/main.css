@@ -10,6 +10,12 @@
     border-style: solid;
   }
 
+ textarea {
+    vertical-align: top;
+    width: 450;
+    height: 150px;
+  }
+
   .flash li {
     margin: 0 0 0 0;
   }
