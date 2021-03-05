@@ -46,7 +46,7 @@ Seed Users: Syracuse, Michigan, Texas, Seattle, NYC
 - Usernames can not be used more than once and you can not duplicate a user with the same username but in a different case.
 - Notes can not be saved if they are blank.
 - Equipment can not be saved if their name or quantity is blank. In addition quantity must be an integer.
-- After you sign up you will be sent to a Character Update page. You must enter a Character Name before you can view your character. This can be changed at anytime (your username can not be changed).
+- After you sign up you will be sent to The Character Update page. You must enter a Character Name before you can view your character. This can be changed at anytime (your username can not be changed).
 
 ## Gems Used
 
