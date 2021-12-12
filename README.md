@@ -32,7 +32,7 @@ Add Seed Data (if you want data pre-loaded for testing):
 
 Run shotgun:
 
-    $ shogtun
+    $ shotgun
 
 Go to local web page: http://localhost:9393/
 
